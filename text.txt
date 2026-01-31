@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine, Lindokuhke Twala!</title>
+  <style>
+    body {
+      background: pink;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      overflow: hidden;
+    }
+    h1 {
+      color: red;
+      font-size: 3em;
+    }
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 20px;
+    }
+    #yesBtn {
+      background-color: red;
+      color: white;
+    }
+    #noBtn {
+      background-color: white;
+      color: red;
+      border: 2px solid red;
+      position: absolute;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 2em;
+      animation: float 6s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Lindokuhke Twala, will you be my Valentine?</h1>
+  <button id="yesBtn" class="btn">Yes 💖</button>
+  <button id="noBtn" class="btn">No 💔</button>
+
+  <!-- Hidden audio player -->
+  <audio id="valentineSong" loop>
+    <source src="your-song-file.mp3" type="audio/mp3">
+    <!-- Replace "your-song-file.mp3" with the actual audio file URL -->
+  </audio>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const song = document.getElementById('valentineSong');
+
+    // Position the "No" button initially
+    noBtn.style.left = "50%";
+    noBtn.style.top = "60%";
+
+    // Make the "No" button run away when hovered
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - noBtn.offsetWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - noBtn.offsetHeight));
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // Add a cute alert and play music when "Yes" is clicked
+    yesBtn.addEventListener('click', () => {
+      alert("Yay Lindokuhke Twala! You’re my Valentine! ❤️");
+      song.play();
+    });
+
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>
